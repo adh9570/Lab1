@@ -14,11 +14,11 @@ OOB_COLOR = '#CD0065'
 
 if __name__ == "__main__":
     # Read in arguments
-    terrain_image_name
-    elevation_file_name
-    path_file_name
-    season
-    output_image_filename
+    terrain_image_name = ''
+    elevation_file_name = ''
+    path_file_name = ''
+    season = ''
+    output_image_filename = ''
 
     try:
         terrain_image_name = sys.argv[1]
@@ -37,5 +37,7 @@ if __name__ == "__main__":
     print(output_image_filename)
 
     terrain_image = Image.open(terrain_image_name)
-    pix = terrain_image.load()
-    print pix[x, y]
+    terrain_pixel_map = terrain_image.load()
+    for x in range(terrain_image.size[0]):
+        for y in range(terrain_image.size[1]):
+            print (terrain_pixel_map[x, y])
