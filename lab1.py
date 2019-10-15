@@ -14,6 +14,12 @@ OOB_COLOR = '#CD0065'
 
 if __name__ == "__main__":
     # Read in arguments
+    terrain_image_name
+    elevation_file_name
+    path_file_name
+    season
+    output_image_filename
+
     try:
         terrain_image_name = sys.argv[1]
         elevation_file_name = sys.argv[2]
@@ -22,6 +28,7 @@ if __name__ == "__main__":
         output_image_filename = sys.argv[5] 
     except:
         print("Error: args should be formatted [terrain-image, elevation-file, path-file, season (summer,fall,winter,or spring), output-image-filename]")
+        return
 
     print(terrain_image_name)
     print(elevation_file_name)
