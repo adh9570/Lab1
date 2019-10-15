@@ -50,9 +50,6 @@ if __name__ == "__main__":
 
     terrain_image = Image.open(terrain_image_name)
     terrain_pixel_map = terrain_image.load()
-    for x in range(0, 395):
-        for y in range(0, 500):
-            print (terrain_pixel_map[x, y])
 
     location = [0, 0]   # initialize loc to [0, 0]
     with open(path_file_name) as path_file:
