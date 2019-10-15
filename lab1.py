@@ -24,7 +24,7 @@ ROAD_SPEED = 4
 FOOTPATH_SPEED = 4
 OOB_SPEED = 0
 
-# return location at top of path file
+# return location at top of path file, removes top line
 def getLoc(path_file_name):
     with open(path_file_name) as path_file:
         line = path_file.readline()
@@ -62,4 +62,7 @@ if __name__ == "__main__":
     terrain_image = Image.open(terrain_image_name)
     terrain_pixel_map = terrain_image.load()
 
-    getLoc(path_file_name)
+    location = getLoc(path_file_name)   # starting location, first location in path file
+    print(location)
+    target = getLoc(path_file_name)
+    print(target)
