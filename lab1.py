@@ -1,5 +1,5 @@
 import sys
-from PTL import Image
+from PIL import Image
 
 OPEN_LAND_COLOR = '#F89412'
 ROUGH_MEADOW_COLOR = '#FFC000'
