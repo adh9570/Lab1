@@ -28,24 +28,10 @@ OOB_SPEED = 0
 def getLoc(path_file_name):
     with open(path_file_name) as path_file:
         line = path_file.readline()
-        print(line.split())
-        # for word in line.split():
-        #     print(word)
+        location = line.split()
+        print(path_file)
+        return location
 
-    # location = [0, 0]   # initialize loc to [0, 0]
-    # with open(path_file_name) as path_file:
-    #     line = path_file.readline()
-    #     cnt = 0
-    #     for word in line.split():
-    #         print(word)
-    #         line[cnt] = word
-    #         cnt = 1
-    #     location = line
-    #     count = 1
-    #     while line:
-    #         print(line)
-    #         line = path_file.readline()
-    #         count += 1
 
 if __name__ == "__main__":
     # Read in arguments
