@@ -41,3 +41,5 @@ if __name__ == "__main__":
     for x in range(terrain_image.size[0]):
         for y in range(terrain_image.size[1]):
             print (terrain_pixel_map[x, y])
+            if OOB_COLOR == terrain_pixel_map[x, y]:
+                print("OOB")
