@@ -58,8 +58,8 @@ if __name__ == "__main__":
     with open(path_file_name) as path_file:
         line = path_file.readline()
         location = line
-        cnt = 1
+        count = 1
         while line:
             print(line)
             line = path_file.readline()
-            cnt += 1
+            count += 1
