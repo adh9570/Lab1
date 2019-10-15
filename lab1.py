@@ -1,4 +1,5 @@
 import sys
+from PTL import Image
 
 OPEN_LAND_COLOR = '#F89412'
 ROUGH_MEADOW_COLOR = '#FFC000'
@@ -14,16 +15,20 @@ OOB_COLOR = '#CD0065'
 if __name__ == "__main__":
     # Read in arguments
     try:
-        terrain_image = sys.argv[1]
-        elevation_file = sys.argv[2]
-        path_file = sys.argv[3]
+        terrain_image_name = sys.argv[1]
+        elevation_file_name = sys.argv[2]
+        path_file_name = sys.argv[3]
         season = sys.argv[4]
         output_image_filename = sys.argv[5] 
     except:
         print("Error: args should be formatted [terrain-image, elevation-file, path-file, season (summer,fall,winter,or spring), output-image-filename]")
 
-    print(terrain_image)
-    print(elevation_file)
-    print(path_file)
+    print(terrain_image_name)
+    print(elevation_file_name)
+    print(path_file_name)
     print(season)
     print(output_image_filename)
+
+    terrain_image = Image.open(terrain_image_name)
+    pix = terrain_image.load()
+    print pix[x, y]
