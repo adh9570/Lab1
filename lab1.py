@@ -28,8 +28,9 @@ OOB_SPEED = 0
 def getLoc(path_file_name):
     with open(path_file_name) as path_file:
         line = path_file.readline()
-        for word in line.split():
-            print(word)
+        print(line.split())
+        # for word in line.split():
+        #     print(word)
 
     # location = [0, 0]   # initialize loc to [0, 0]
     # with open(path_file_name) as path_file:
