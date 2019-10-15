@@ -12,8 +12,11 @@ FOOTPATH_COLOR = '#000000'
 OOB_COLOR = '#CD0065'
 
 if __name__ == "__main__":
-    terrain_image = sys.argv[1]
-    elevation_file = sys.argv[2]
-    path_file = sys.argv[3]
-    season = sys.argv[4]
-    output_image_filename = sys.argv[5] 
+    try:
+        terrain_image = sys.argv[1]
+        elevation_file = sys.argv[2]
+        path_file = sys.argv[3]
+        season = sys.argv[4]
+        output_image_filename = sys.argv[5] 
+    except:
+        print("wiggle woogle")
