@@ -12,6 +12,7 @@ FOOTPATH_COLOR = '#000000'
 OOB_COLOR = '#CD0065'
 
 if __name__ == "__main__":
+    # Read in arguments
     try:
         terrain_image = sys.argv[1]
         elevation_file = sys.argv[2]
@@ -19,4 +20,10 @@ if __name__ == "__main__":
         season = sys.argv[4]
         output_image_filename = sys.argv[5] 
     except:
-        print("wiggle woogle")
+        print("Error: args should be formatted [terrain-image, elevation-file, path-file, season (summer,fall,winter,or spring), output-image-filename]")
+
+    print(terrain_image)
+    print(elevation_file)
+    print(path_file)
+    print(season)
+    print(output_image_filename)
