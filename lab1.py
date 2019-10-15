@@ -28,7 +28,7 @@ if __name__ == "__main__":
         output_image_filename = sys.argv[5] 
     except:
         print("Error: args should be formatted [terrain-image, elevation-file, path-file, season (summer,fall,winter,or spring), output-image-filename]")
-        return
+        sys.exit()
 
     print(terrain_image_name)
     print(elevation_file_name)
