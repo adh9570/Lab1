@@ -10,7 +10,7 @@ IMPASS_VEG_COLOR = '#054918'
 WATER_COLOR = '#0000FF'
 ROAD_COLOR = '#473303'
 FOOTPATH_COLOR = '#000000'
-OOB_COLOR = '#CD0065'
+OOB_COLOR = '(205, 0, 101, 255)'
 
 if __name__ == "__main__":
     # Read in arguments
