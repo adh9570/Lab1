@@ -12,6 +12,18 @@ ROAD_COLOR = (71, 51, 3, 255)
 FOOTPATH_COLOR = (0, 0, 0, 255)
 OOB_COLOR = (205, 0, 101, 255)
 
+# Speeds in MPH
+OPEN_LAND_SPEED = 4
+ROUGH_MEADOW_SPEED = 1.5
+EASY_MOVE_FOREST_SPEED = 3
+SLOW_RUN_FOREST_SPEED = 3
+WALK_FOREST_SPEED = 2.5
+IMPASS_VEG_SPEED = 0
+WATER_SPEED = 0
+ROAD_SPEED = 4
+FOOTPATH_SPEED = 4
+OOB_SPEED = 0
+
 if __name__ == "__main__":
     # Read in arguments
     terrain_image_name = ''
@@ -38,8 +50,16 @@ if __name__ == "__main__":
 
     terrain_image = Image.open(terrain_image_name)
     terrain_pixel_map = terrain_image.load()
-    for x in range(terrain_image.size[0]):
-        for y in range(terrain_image.size[1]):
+    for x in range(0, 395):
+        for y in range(0, 500):
             print (terrain_pixel_map[x, y])
-            if OOB_COLOR == terrain_pixel_map[x, y]:
-                print("OOB")
+
+    location = [0, 0]   # initialize loc to [0, 0]
+    with open(path_file_name) as path_file:
+        line = path_file.readline()
+        location = line
+        cnt = 1
+        while line:
+            print(line)
+            line = path_file.readline()
+            cnt += 1
