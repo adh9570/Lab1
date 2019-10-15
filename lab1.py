@@ -29,11 +29,11 @@ def getLoc(path_file_name):
     with open(path_file_name) as path_file:
         line = path_file.readline()
         location = line.split()
-        print(path_file)
         lines = path_file.readlines()
         return location
     with open(path_file_name, 'w') as path_file:
         path_file.writelines(lines[1:])
+        print(lines)
 
 
 if __name__ == "__main__":
