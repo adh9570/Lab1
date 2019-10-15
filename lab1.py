@@ -24,6 +24,28 @@ ROAD_SPEED = 4
 FOOTPATH_SPEED = 4
 OOB_SPEED = 0
 
+# return location at top of path file
+def getLoc(path_file_name):
+    with open(path_file_name) as path_file:
+        line = path_file.readline()
+        for word in line.split():
+            print(word)
+
+    # location = [0, 0]   # initialize loc to [0, 0]
+    # with open(path_file_name) as path_file:
+    #     line = path_file.readline()
+    #     cnt = 0
+    #     for word in line.split():
+    #         print(word)
+    #         line[cnt] = word
+    #         cnt = 1
+    #     location = line
+    #     count = 1
+    #     while line:
+    #         print(line)
+    #         line = path_file.readline()
+    #         count += 1
+
 if __name__ == "__main__":
     # Read in arguments
     terrain_image_name = ''
@@ -51,17 +73,4 @@ if __name__ == "__main__":
     terrain_image = Image.open(terrain_image_name)
     terrain_pixel_map = terrain_image.load()
 
-    location = [0, 0]   # initialize loc to [0, 0]
-    with open(path_file_name) as path_file:
-        line = path_file.readline()
-        cnt = 0
-        for word in line.split():
-            print(word)
-            line[cnt] = word
-            cnt = 1
-        location = line
-        count = 1
-        while line:
-            print(line)
-            line = path_file.readline()
-            count += 1
+    getLoc(path_file_name)
