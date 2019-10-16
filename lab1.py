@@ -111,10 +111,11 @@ def drawPath(path, terrain_pixel_map, output_image_filename):
         x = node.getX()
         y = node.getY()
         terrain_pixel_map[x, y] = PATH_COLOR
-    with open(output_image_filename, 'w') as output_image:
-        for line in terrain_pixel_map:
-            print("LINE ", line)
-            x = output_image
+    print(terrain_pixel_map)
+    # with open(output_image_filename, 'w') as output_image:
+    #     for line in terrain_pixel_map:
+    #         print("LINE ", line)
+    #         x = output_image
 
 
 
