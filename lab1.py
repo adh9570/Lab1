@@ -15,19 +15,7 @@ OOB_COLOR = (205, 0, 101, 255)
 
 ICE_COLOR = (0, 255, 255, 255)  # for winter only
 
-# Speeds in MPH
-OPEN_LAND_SPEED = 4
-ROUGH_MEADOW_SPEED = 1.5
-EASY_MOVE_FOREST_SPEED = 3
-SLOW_RUN_FOREST_SPEED = 3
-WALK_FOREST_SPEED = 2.5
-IMPASS_VEG_SPEED = 0
-WATER_SPEED = 0
-ROAD_SPEED = 4
-FOOTPATH_SPEED = 4
-OOB_SPEED = 0
-
-
+# Speed in miles per hour
 def getSpeed(node, terrain_pixel_map):
     x = node.getX()
     y = node.getY()
@@ -38,14 +26,23 @@ def getSpeed(node, terrain_pixel_map):
 
     if location == (OOB_COLOR or IMPASS_VEG_COLOR or WATER_COLOR):
         print("Speed zero")
+        speed = 0
     if location == ROUGH_MEADOW_COLOR:
         print("Speed 1.5")
+        speed = 1.5
     if location == WALK_FOREST_COLOR:
         print("Speed 2.5")
+        speed = 2.5
     if location == (EASY_MOVE_FOREST_COLOR or SLOW_RUN_FOREST_COLOR):
         print("Speed 3")
+        speed = 3
     if location == (OPEN_LAND_COLOR or ROAD_COLOR or FOOTPATH_COLOR):
         print ("Speed 4")
+        speed = 4
+
+    print("end speed gotten")
+    return speed
+
 
 def getAdj(currentNode, target, terrain_pixel_map):
     x = currentNode.getX()
