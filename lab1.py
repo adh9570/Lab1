@@ -121,7 +121,7 @@ def trimElev(elevation_map_name):
                 print(word)
                 if index > len(line) - 6:  # 6 because we want to leave off the last 5, so indexes len(lines) - 6 through len(lines) - 1
                     print("in the last five")
-                    continue
+                    break
                 words.append(word)
             print("len line after")
             print(len(words))
