@@ -114,6 +114,11 @@ def trimElev(elevation_map_name):
         lines = elevation_file.readlines()
         print(len(lines))
         for line in lines:
+            print("len line before")
+            print(len(line))
+            words = line.split()
+            line = words[0:len(line) - 6]
+            print("len line after")
             print(len(line))
             for word in line.split():
                 print(word)
