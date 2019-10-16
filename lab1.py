@@ -16,7 +16,7 @@ OOB_COLOR = (205, 0, 101, 255)
 ICE_COLOR = (0, 255, 255, 255)  # for winter only
 
 # Speed in miles per hour
-def getSpeed(node, terrain_pixel_map):
+def getSpeed(node, terrain_pixel_map, elevation_file_name):
     x = node.getX()
     y = node.getY()
 
@@ -24,6 +24,7 @@ def getSpeed(node, terrain_pixel_map):
 
     speed = 0
 
+    # Set base speed based on terrain
     if location == (OOB_COLOR or IMPASS_VEG_COLOR or WATER_COLOR):
         print("Speed zero")
         speed = 0
@@ -40,6 +41,10 @@ def getSpeed(node, terrain_pixel_map):
         print ("Speed 4")
         speed = 4
 
+    # Edit speed based on elevation change
+    with open(elevation_file_name) as elevation_file:
+        pass
+
     print("end speed gotten")
     return speed
 
@@ -50,29 +55,44 @@ def getAdj(currentNode, target, terrain_pixel_map):
     nodes = []
     if (x - 1) >= 0:
         node = Node(currentNode.getG() + 1, x - 1, y, target)
-        getSpeed(node, terrain_pixel_map)
-        nodes.append(node)
+        speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        if speed != 0:
+            nodes.append(node)
         if (y - 1) >= 0:
             node = Node(currentNode.getG() + 2, x - 1, y - 1, target)
-            nodes.append(node)
+            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            if speed != 0:
+                nodes.append(node)
         if (y + 1) < 500:   # 500 is max height of map
             node = Node(currentNode.getG() + 2, x - 1, y + 1, target)
-            nodes.append(node)
-    if (x + 1) < 395:   # 395 is max width of map
+            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            if speed != 0:
+                nodes.append(node)
+    if (x + 1) < 395:       # 395 is max width of map
         node = Node(currentNode.getG() + 1, x + 1, y, target)
-        nodes.append(node)
+        speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        if speed != 0:
+            nodes.append(node)
         if (y - 1) >= 0:
             node = Node(currentNode.getG() + 2, x + 1, y - 1, target)
-            nodes.append(node)
+            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            if speed != 0:
+                nodes.append(node)
         if (y + 1) < 500:   # 500 is max height of map
             node = Node(currentNode.getG() + 2, x + 1, y + 1, target)
-            nodes.append(node)
+            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            if speed != 0:
+                nodes.append(node)
     if (y - 1) >= 0:
         node = Node(currentNode.getG() + 1, x, y - 1, target)
-        nodes.append(node)
+        speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        if speed != 0:
+            nodes.append(node)
     if (y + 1) < 500:
         node = Node(currentNode.getG() + 1, x, y + 1, target)
-        nodes.append(node)
+        speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        if speed != 0:
+            nodes.append(node)
 
     return nodes
 
@@ -95,9 +115,10 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
         # Base case
         if currentNode.getX() == target[0] and currentNode.getY() == target[1]:
-            print("TARGET FOUND")
+            print("LOCAL TARGET FOUND", currentNode.getX(), currentNode.getY())
             target = getLoc(path_file_name)
             if target == []:    # if target = [], we're at the end of the search
+                print("FINAL TARGET FOUND", target[0], target[1])
                 return currentNode
             continue
 
