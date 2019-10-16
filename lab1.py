@@ -136,7 +136,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                     path.append(current)
                     current = current.parent
                 return path[::-1]
-            continue
 
         # Get adjacent nodes to currentNode
         nodes = getAdj(currentNode, target, terrain_pixel_map)
