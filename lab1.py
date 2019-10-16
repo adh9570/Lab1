@@ -116,7 +116,16 @@ def drawPath(path, terrain_pixel_map, output_image_filename):
     #     for line in terrain_pixel_map:
     #         print("LINE ", line)
     #         x = output_image
-    terrain_pixel_map.save(output_image_filename)
+    print("Len terrain mapp ", len(terrain_pixel_map[0]))
+    out = Image.new("RGBA", len(terrain_pixel_map[0]), None)
+
+    for x in range(0, len(terrain_pixel_map)):
+        for y in range(0, len(terrain_pixel_map[0])):
+            r,g,b,a = terrain_pixel_map[x, y]
+
+    out.save(output_image_filename)
+
+    # terrain_pixel_map.save(output_image_filename)
 
     Image.show()
 
