@@ -149,14 +149,20 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             # node.setF(node.getG() + node.getH())
 
             for element in openList:
+                continuer = False
                 if node.getX() == element.getX() and node.getY() == element.getY():
                     print("in if")
                     if node.getG() > element.getG():
                         print("continuing")
-                        continue
+                        continuer = True
+                        break
+            
+            if continuer:
+                continue
+                        
                 # else:
-                print("Appending")
-                openList.append(node)
+            print("Appending")
+            openList.append(node)
             
         print("end of while", openList)
 
