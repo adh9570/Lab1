@@ -106,26 +106,16 @@ def getAdj(currentNode, target, terrain_pixel_map):
     return nodes
 
 
-def drawPath(path, terrain_pixel_map, output_image_filename):
+def drawPath(path, terrain_image, output_image_filename):
+    out_image = Image.new("RGBA", (395, 500), None)
+    out_image = terrain_image
+    # out_image = Image.open(terrain_image_name)
+    out_pixel_map = out_image.load()
     for node in path:
         x = node.getX()
         y = node.getY()
-        terrain_pixel_map[x, y] = PATH_COLOR
-    print(terrain_pixel_map)
-    # with open(output_image_filename, 'w') as output_image:
-    #     for line in terrain_pixel_map:
-    #         print("LINE ", line)
-    #         x = output_image
-    print("Len terrain mapp ", len(terrain_pixel_map[0]))
-    out = Image.new("RGBA", len(terrain_pixel_map[0]), None)
-
-    for x in range(0, len(terrain_pixel_map)):
-        for y in range(0, len(terrain_pixel_map[0])):
-            r,g,b,a = terrain_pixel_map[x, y]
-
-    out.save(output_image_filename)
-
-    # terrain_pixel_map.save(output_image_filename)
+        out_pixel_map[x, y] = PATH_COLOR
+    
 
     Image.show()
 
