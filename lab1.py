@@ -14,6 +14,7 @@ FOOTPATH_COLOR = (0, 0, 0, 255)
 OOB_COLOR = (205, 0, 101, 255)
 
 ICE_COLOR = (0, 255, 255, 255)  # for winter only
+PATH_COLOR = (255, 0, 0, 255)   # path will be red
 
 # Speed in miles per hour
 def getSpeed(node, terrain_pixel_map, elevation_file_name):
@@ -105,6 +106,17 @@ def getAdj(currentNode, target, terrain_pixel_map):
     return nodes
 
 
+def drawPath(path, terrain_pixel_map, output_image_filename):
+    for node in path:
+        x = node.getX()
+        y = node.getY()
+        terrain_pixel_map[x, y] = PATH_COLOR
+    with open(output_image_filename, 'w') as output_image:
+        for line in terrain_pixel_map:
+            print("LINE ", line)
+            x = output_image
+
+
 
 # simple A* search
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
@@ -114,7 +126,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     start.setF(0)
     openList.append(start)
     while openList != []:
-        print("OPEN LIST IS FULL OF THINGS")
         currentNode = openList[0]
         # determine node in open list with lowest f
         for node in openList:
@@ -142,7 +153,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                     contained = True
                     break
             if contained:
-                print("contained")
                 continue
             ## node.setG(currentNode.getG() + distance between node and currentNode)
             # node.setH(distance from node to target)
@@ -152,9 +162,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             for element in openList:
                 continuer = False
                 if node.getX() == element.getX() and node.getY() == element.getY():
-                    print("in if")
                     if node.getG() > element.getG():
-                        print("continuing")
                         continuer = True
                         break
             
@@ -162,10 +170,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 continue
                         
                 # else:
-            print("Appending")
             openList.append(node)
             
-        print("end of while")
 
 
 # Trims the last 5 elements from every line to make each line 395 long
@@ -246,4 +252,8 @@ if __name__ == "__main__":
     location = getLoc(path_file_name)   # starting location, first location in path file
     target = getLoc(path_file_name)
     
-    search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
+    # search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
+
+    path = [Node(0, location[0], location[1], target), Node(0, location[0] + 1, location[1] + 1, target), Node(0, location[0] + 2, location[1] + 2, target), Node(0, location[0] + 3, location[1] + 3, target), Node(0, location[0] + 4, location[1] + 4, target), Node(0, location[0] + 5, location[1] + 5, target), Node(0, location[0] + 6, location[1] + 6, target), Node(0, location[0] + 7, location[1] + 7, target), Node(0, location[0] + 8, location[1] + 8, target), Node(0, location[0] + 9, location[1] + 9, target), Node(0, location[0] + 10, location[1] + 10, target)]
+
+    drawPath(path, terrain_pixel_map, output_image_filename)
