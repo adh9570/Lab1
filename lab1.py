@@ -65,7 +65,7 @@ def getAdj(currentNode, target, terrain_pixel_map):
     if (x - 1) >= 0:
         node = Node(currentNode.getG() + 1, x - 1, y, target)
         speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
-        if speed != 0:
+        if speed != 0:      # we avoid any impassable terrain with this if
             nodes.append(node)
         if (y - 1) >= 0:
             node = Node(currentNode.getG() + 2, x - 1, y - 1, target)
@@ -106,9 +106,8 @@ def getAdj(currentNode, target, terrain_pixel_map):
     return nodes
 
 
+# Path drawn in red
 def drawPath(path, terrain_image, output_image_filename):
-    # out_image = Image.new("RGBA", (395, 500), None)
-    # out_image = terrain_image
     out_image = Image.open(terrain_image_name)
     out_pixel_map = out_image.load()
     for node in path:
@@ -119,7 +118,6 @@ def drawPath(path, terrain_image, output_image_filename):
     out_image.save(output_image_filename)
 
     out_image.show()
-
 
 
 # simple A* search
@@ -158,7 +156,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                     break
             if contained:
                 continue
-            ## node.setG(currentNode.getG() + distance between node and currentNode)
+            
+            # speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
             # node.setH(distance from node to target)
             # node.setF(node.getG() + node.getH())
 
