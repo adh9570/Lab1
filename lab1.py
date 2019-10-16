@@ -117,8 +117,6 @@ def drawPath(path, terrain_image, output_image_filename):
     
     out_image.save(output_image_filename)
 
-    out_image.show()
-
 
 # simple A* search
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
@@ -134,6 +132,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             if node.getF() < currentNode.getF():
                 currentNode = node
         openList.remove(currentNode)
+        closedList.append(currentNode)
 
         # Base case
         if currentNode.getX() == target[0] and currentNode.getY() == target[1]:
