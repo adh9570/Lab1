@@ -120,7 +120,7 @@ def trimElev(elevation_map_name):
             print("len words")
             print(len(words))
 
-            words = words[0:394]
+            words = words[0:-5]
             print('now words')
             print(len(words))
             # print(line)
