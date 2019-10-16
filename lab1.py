@@ -142,6 +142,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                     contained = True
                     continue
             if contained:
+                print("contained")
                 continue
             ## node.setG(currentNode.getG() + distance between node and currentNode)
             # node.setH(distance from node to target)
@@ -151,9 +152,9 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if node.getX() == element.getX() and node.getY() == element.getY():
                     if node.getG() > element.getG():
                         continue
-                else:
-                    print("Appending")
-                    openList.append(node)
+                # else:
+                print("Appending")
+                openList.append(node)
 
 
 # Trims the last 5 elements from every line to make each line 395 long
