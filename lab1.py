@@ -24,6 +24,29 @@ ROAD_SPEED = 4
 FOOTPATH_SPEED = 4
 OOB_SPEED = 0
 
+
+def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
+    if location == target:
+        target = getLoc(path_file_name)
+        if target == []:    # if target = [], we're at the end of the search
+            return "COMPLETE"
+    openList = []
+    closedList = []
+    start = Node(0, location[0], location[1], target)   # g, x, y, target
+    start.setF(0)
+    openList.append(start)
+    while openList != []:
+        currentNode = openList[0]
+        # determine node in open list with lowest f
+        index = 0
+        nodeInx = index
+        for node in openList:
+            if node.getF() < currentNode.getF():
+                currentNode = node
+                nodeInx = index
+            index += 1
+        openList.remove(currentNode)
+
 # return location at top of path file, removes top line
 def getLoc(path_file_name):
     with open(path_file_name) as path_file:
@@ -33,6 +56,18 @@ def getLoc(path_file_name):
     with open(path_file_name, 'w') as path_file:
         path_file.writelines(lines[0:])
     return location
+
+
+def fall():
+    print("FALL")
+
+
+def winter():
+    print("WINTER")
+
+
+def spring():
+    print("SPRING")
 
 
 if __name__ == "__main__":
@@ -62,7 +97,39 @@ if __name__ == "__main__":
     terrain_image = Image.open(terrain_image_name)
     terrain_pixel_map = terrain_image.load()
 
+    '''
+    TODO: implement fall winter and spring to do changes to globals in writeup
+    '''
+    if season == 'fall':
+        fall()
+    elif season == 'winter':
+        winter()
+    elif season == 'spring':
+        spring()
+
     location = getLoc(path_file_name)   # starting location, first location in path file
-    print(location)
     target = getLoc(path_file_name)
-    print(target)
+    
+    search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
+
+
+class Node:
+    def __init__(self, g, x, y, target):
+        self.x = x
+        self.y = y
+        self.g = g
+        self.h = self.calculateH(target)
+        self.f = g + self.h
+    
+    def getF(self):
+        return self.f
+
+    # for start node
+    def setF(self, f):
+        self.f = f
+
+    def calculateH(self, target):
+        x = abs(self.x - target[0])
+        y = abs(self.y - target[1])
+        self.h = (x**2 + y**2)    # pythagorean theorem
+        return self.h
