@@ -117,6 +117,7 @@ def trimElev(elevation_map_name):
             print("len line before")
             print(len(line))
             words = line.split()
+            len(words)
             # print(line)
             # for word in line.split():
 
