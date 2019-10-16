@@ -116,6 +116,9 @@ def drawPath(path, terrain_pixel_map, output_image_filename):
     #     for line in terrain_pixel_map:
     #         print("LINE ", line)
     #         x = output_image
+    terrain_pixel_map.save(output_image_filename)
+
+    Image.show()
 
 
 
