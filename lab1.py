@@ -144,26 +144,16 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             # if node is contained in closedList
             contained = False
             for element in closedList:
-                if node == element:
-                    contained = True
-                    break
-            if contained:
-                continue
+                if element == node:
+                    continue
             
             # speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
             # node.setH(distance from node to target)
             # node.setF(node.getG() + node.getH())
 
-            continuer = False
             for element in openList:
-                continuer = False
-                if node.getX() == element.getX() and node.getY() == element.getY():
-                    if node.getG() > element.getG():
-                        continuer = True
-                        break
-            
-            if continuer:
-                continue
+                if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
+                    continue
                         
                 # else:
             openList.append(node)
