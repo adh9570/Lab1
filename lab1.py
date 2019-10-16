@@ -73,7 +73,9 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 def getLoc(path_file_name):
     with open(path_file_name) as path_file:
         line = path_file.readline()
-        location = line.split()
+        loc = line.split()
+        location[0] = int(loc[0])
+        location[1] = int(loc[1])
         lines = path_file.readlines()
     with open(path_file_name, 'w') as path_file:
         path_file.writelines(lines[0:])
