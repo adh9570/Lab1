@@ -148,6 +148,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             # node.setH(distance from node to target)
             # node.setF(node.getG() + node.getH())
 
+            continuer = False
             for element in openList:
                 continuer = False
                 if node.getX() == element.getX() and node.getY() == element.getY():
