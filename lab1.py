@@ -124,7 +124,7 @@ def trimElev(elevation_map_name):
                     continue
                 words.append(word)
             print("len line after")
-            print(len(line))
+            print(len(words))
             index += 1
         print(elevation_file.readlines())
 
