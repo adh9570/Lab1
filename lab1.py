@@ -108,7 +108,10 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
 
 def trimElev(elevation_map_name):
+    print("in here")
     with open(elevation_file_name) as elevation_file:
+        for element in elevation_file.readlines():
+            print("LINE")
         print(elevation_file.readlines())
 
 
