@@ -114,6 +114,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     start.setF(0)
     openList.append(start)
     while openList != []:
+        print("OPEN LIST IS FULL OF THINGS")
         currentNode = openList[0]
         # determine node in open list with lowest f
         for node in openList:
