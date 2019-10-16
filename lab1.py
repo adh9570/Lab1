@@ -158,7 +158,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 print("Appending")
                 openList.append(node)
             
-        print("end of while")
+        print("end of while", openList)
 
 
 # Trims the last 5 elements from every line to make each line 395 long
