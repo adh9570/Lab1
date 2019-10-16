@@ -26,11 +26,41 @@ FOOTPATH_SPEED = 4
 OOB_SPEED = 0
 
 
+def getAdj(currentNode, target):
+    x = currentNode.getX()
+    y = currentNode.getY()
+    nodes = []
+    if (x - 1) >= 0:
+        node = Node(currentNode.getG() + 1, x - 1, y, target)
+        nodes.append(node)
+        if (y - 1) >= 0:
+            node = Node(currentNode.getG() + 2, x - 1, y - 1, target)
+            nodes.append(node)
+        if (y + 1) < 500:   # 500 is max height of map
+            node = Node(currentNode.getG() + 2, x - 1, y + 1, target)
+            nodes.append(node)
+    if (x + 1) < 395:   # 395 is max width of map
+        node = Node(currentNode.getG() + 1, x + 1, y, target)
+        nodes.append(node)
+        if (y - 1) >= 0:
+            node = Node(currentNode.getG() + 2, x + 1, y - 1, target)
+            nodes.append(node)
+        if (y + 1) < 500:   # 500 is max height of map
+            node = Node(currentNode.getG() + 2, x + 1, y + 1, target)
+            nodes.append(node)
+    if (y - 1) >= 0:
+        node = Node(currentNode.getG() + 1, x, y - 1, target)
+        nodes.append(node)
+    if (y + 1) < 500:
+        node = Node(currentNode.getG() + 1, x, y + 1, target)
+        nodes.append(node)
+
+    return nodes
+
+
+
+
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
-    if location == target:
-        target = getLoc(path_file_name)
-        if target == []:    # if target = [], we're at the end of the search
-            return "COMPLETE"
     openList = []
     closedList = []
     start = Node(0, location[0], location[1], target)   # g, x, y, target
@@ -39,16 +69,48 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     while openList != []:
         currentNode = openList[0]
         # determine node in open list with lowest f
-        index = 0
-        nodeInx = index
         for node in openList:
             if node.getF() < currentNode.getF():
                 currentNode = node
-                nodeInx = index
-            index += 1
         openList.remove(currentNode)
+
+        # Base case
         if currentNode.getX() == target[0] and currentNode.getY() == target[1]:
-            print()
+            print("TARGET FOUND")
+            target = getLoc(path_file_name)
+            if target == []:    # if target = [], we're at the end of the search
+                return currentNode
+            continue
+
+        # Get adjacent nodes to currentNode
+        nodes = getAdj(currentNode, target)
+
+        for node in nodes:
+            # if node is contained in closedList
+            contained = False
+            for element in closedList:
+                if node == element:
+                    contained = True
+                    continue
+            if contained:
+                continue
+            ## node.setG(currentNode.getG() + distance between node and currentNode)
+            # node.setH(distance from node to target)
+            # node.setF(node.getG() + node.getH())
+
+            for element in openList:
+                if node.getX() == element.getX() and node.getY() == element.getY():
+                    if node.getG() > element.getG():
+                        continue
+
+                else:
+                    openList.append(node)
+
+
+def trimElev(elevation_map_name):
+    with open(elevation_file_name) as elevation_file:
+        print(elevation_file.readlines())
+
 
 # return location at top of path file, removes top line
 def getLoc(path_file_name):
@@ -102,6 +164,8 @@ if __name__ == "__main__":
 
     terrain_image = Image.open(terrain_image_name)
     terrain_pixel_map = terrain_image.load()
+
+    trimElev(elevation_file_name)
 
     '''
     TODO: implement fall winter and spring to do changes to globals in writeup

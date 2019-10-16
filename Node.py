@@ -19,8 +19,11 @@ class Node:
     def getY(self):
         return self.y
 
+    def getG(self):
+        return self.g
+
     def calculateH(self, target):
         x = abs(self.x - target[0])
         y = abs(self.y - target[1])
-        self.h = (x**2 + y**2)    # pythagorean theorem
+        self.h = (x**2 + y**2)    # pythag theorem # TODO make not pythag
         return self.h
