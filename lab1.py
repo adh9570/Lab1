@@ -29,19 +29,19 @@ def getSpeed(node, terrain_pixel_map, elevation_file_name):
         print("Speed zero")
         print(location)
         speed = 0
-    if location == ROUGH_MEADOW_COLOR:
+    elif location == ROUGH_MEADOW_COLOR:
         print("Speed 1.5")
         print(location)
         speed = 1.5
-    if location == WALK_FOREST_COLOR:
+    elif location == WALK_FOREST_COLOR:
         print("Speed 2.5")
         print(location)
         speed = 2.5
-    if location == (EASY_MOVE_FOREST_COLOR or SLOW_RUN_FOREST_COLOR):
+    elif location == (EASY_MOVE_FOREST_COLOR or SLOW_RUN_FOREST_COLOR):
         print("Speed 3")
         print(location)
         speed = 3
-    if location == (OPEN_LAND_COLOR or ROAD_COLOR or FOOTPATH_COLOR):
+    elif location == (OPEN_LAND_COLOR or ROAD_COLOR or FOOTPATH_COLOR):
         print ("Speed 4")
         print(location)
         speed = 4
