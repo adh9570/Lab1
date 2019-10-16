@@ -40,12 +40,14 @@ def getSpeed(node, terrain_pixel_map, elevation_file_name):
     if location == (OPEN_LAND_COLOR or ROAD_COLOR or FOOTPATH_COLOR):
         print ("Speed 4")
         speed = 4
+    else:
+        print("Terrain not recognized.")
 
     # Edit speed based on elevation change
     with open(elevation_file_name) as elevation_file:
         pass
 
-    print("end speed gotten")
+    # print("end speed gotten")
     return speed
 
 
@@ -142,8 +144,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if node.getX() == element.getX() and node.getY() == element.getY():
                     if node.getG() > element.getG():
                         continue
-
                 else:
+                    print("Appending")
                     openList.append(node)
 
 
