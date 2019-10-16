@@ -1,10 +1,11 @@
 class Node:
-    def __init__(self, g, x, y, target):
+    def __init__(self, g, x, y, target, parent):
         self.x = x
         self.y = y
         self.g = g
         self.h = self.calculateH(target)
         self.f = g + self.h
+        self.parent = parent
     
     def getF(self):
         return self.f
