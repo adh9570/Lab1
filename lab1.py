@@ -108,33 +108,13 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
 
 def trimElev(elevation_map_name):
-    print("in here")
-    with open(elevation_file_name) as elevation_file:
-        index = 0
+    with open(elevation_file_name, 'r+') as elevation_file:
         lines = elevation_file.readlines()
-        print(len(lines))
         for line in lines:
-            print("len line before")
-            print(len(line))
             words = line.split()
-            print("len words")
-            print(len(words))
+            elevation_file.writelines(words[0:-5])
 
-            words = words[0:-5]
-            print('now words')
-            print(len(words))
-            # print(line)
-            # for word in line.split():
-
-            #     print(word)
-            #     if index > len(line) - 7:  # 6 because we want to leave off the last 5, so indexes len(lines) - 6 through len(lines) - 1
-            #         print("in the last five")
-            #         break
-            #     words.append(word)
-            # print("len line after")
-            # print(len(words))
-            index += 1
-        print(elevation_file.readlines())
+    print(elevation_file)
 
 
 # return location at top of path file, removes top line
