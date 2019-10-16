@@ -27,24 +27,14 @@ def getSpeed(node, terrain_pixel_map, elevation_file_name):
 
     # Set base speed based on terrain
     if location == OOB_COLOR or location == IMPASS_VEG_COLOR or location == WATER_COLOR:
-        print("Speed zero")
-        print(location)
         speed = 0
     elif location == ROUGH_MEADOW_COLOR:
-        print("Speed 1.5")
-        print(location)
         speed = 1.5
     elif location == WALK_FOREST_COLOR:
-        print("Speed 2.5")
-        print(location)
         speed = 2.5
     elif location == EASY_MOVE_FOREST_COLOR or location == SLOW_RUN_FOREST_COLOR:
-        print("Speed 3")
-        print(location)
         speed = 3
     elif location == OPEN_LAND_COLOR or location == ROAD_COLOR or location == FOOTPATH_COLOR:
-        print ("Speed 4")
-        print(location)
         speed = 4
     else:
         print("Terrain not recognized.")
