@@ -259,7 +259,7 @@ if __name__ == "__main__":
     location = getLoc(path_file_name)   # starting location, first location in path file
     target = getLoc(path_file_name)
     
-    search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
+    path = search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
     drawPath(path, terrain_image, output_image_filename)
 
     # location = getLoc(path_file_name)
