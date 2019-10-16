@@ -75,8 +75,8 @@ def getLoc(path_file_name):
         line = path_file.readline()
         loc = line.split()
         location = []
-        location[0] = int(loc[0])
-        location[1] = int(loc[1])
+        location.append(int(loc[0]))
+        location.append(int(loc[1]))
         lines = path_file.readlines()
     with open(path_file_name, 'w') as path_file:
         path_file.writelines(lines[0:])
