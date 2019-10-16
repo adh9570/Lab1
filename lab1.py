@@ -37,7 +37,7 @@ def getSpeed(node, terrain_pixel_map, elevation_file_name):
         print("Speed 2.5")
         print(location)
         speed = 2.5
-    elif location == (EASY_MOVE_FOREST_COLOR or SLOW_RUN_FOREST_COLOR):
+    elif location == EASY_MOVE_FOREST_COLOR or location == SLOW_RUN_FOREST_COLOR:
         print("Speed 3")
         print(location)
         speed = 3
