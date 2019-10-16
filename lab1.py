@@ -140,7 +140,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             for element in closedList:
                 if node == element:
                     contained = True
-                    continue
+                    break
             if contained:
                 print("contained")
                 continue
@@ -150,7 +150,9 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY():
+                    print("in if")
                     if node.getG() > element.getG():
+                        print("continuing")
                         continue
                 # else:
                 print("Appending")
