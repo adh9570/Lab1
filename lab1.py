@@ -42,6 +42,7 @@ def getSpeed(node, terrain_pixel_map, elevation_file_name):
         speed = 4
     else:
         print("Terrain not recognized.")
+        print(location)
 
     # Edit speed based on elevation change
     with open(elevation_file_name) as elevation_file:
