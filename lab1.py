@@ -254,18 +254,20 @@ if __name__ == "__main__":
     
     # search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
 
-    x1 = Node(0, location[0], location[1], target)
-    x2 = Node(0, location[0] + 1, location[1] + 1, target)
-    x3 = Node(0, location[0] + 2, location[1] + 2, target)
-    x4 = Node(0, location[0] + 3, location[1] + 3, target)
-    x5 = Node(0, location[0] + 4, location[1] + 4, target)
-    x6 = Node(0, location[0] + 5, location[1] + 5, target)
-    x7 = Node(0, location[0] + 6, location[1] + 6, target)
-    x8 = Node(0, location[0] + 7, location[1] + 7, target)
-    x9 = Node(0, location[0] + 8, location[1] + 8, target)
-    x10 = Node(0, location[0] + 9, location[1] + 9, target)
-    x11 = Node(0, location[0] + 10, location[1] + 10, target)
-
-    path = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11]
+    path = [Node(0, location[0], location[1], target), Node(0, location[0] + 1, location[1] + 1, target), Node(0, location[0] + 2, location[1] + 2, target), Node(0, location[0] + 3, location[1] + 3, target), Node(0, location[0] + 4, location[1] + 4, target), Node(0, location[0] + 5, location[1] + 5, target), Node(0, location[0] + 6, location[1] + 6, target), Node(0, location[0] + 7, location[1] + 7, target), Node(0, location[0] + 8, location[1] + 8, target), Node(0, location[0] + 9, location[1] + 9, target), Node(0, location[0] + 10, location[1] + 10, target)]
 
     drawPath(path, terrain_pixel_map, output_image_filename)
+
+    # x1 = Node(0, location[0], location[1], target)
+    # x2 = Node(0, location[0] + 1, location[1] + 1, target)
+    # x3 = Node(0, location[0] + 2, location[1] + 2, target)
+    # x4 = Node(0, location[0] + 3, location[1] + 3, target)
+    # x5 = Node(0, location[0] + 4, location[1] + 4, target)
+    # x6 = Node(0, location[0] + 5, location[1] + 5, target)
+    # x7 = Node(0, location[0] + 6, location[1] + 6, target)
+    # x8 = Node(0, location[0] + 7, location[1] + 7, target)
+    # x9 = Node(0, location[0] + 8, location[1] + 8, target)
+    # x10 = Node(0, location[0] + 9, location[1] + 9, target)
+    # x11 = Node(0, location[0] + 10, location[1] + 10, target)
+
+    # path = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11
