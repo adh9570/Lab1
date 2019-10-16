@@ -44,7 +44,7 @@ def getSpeed(node, terrain_pixel_map):
         print("Speed 2.5")
     if location == (EASY_MOVE_FOREST_COLOR or SLOW_RUN_FOREST_COLOR):
         print("Speed 3")
-    if location == (OPEN_LAND_COLOR or ROAD_COLOR or FOOTPATH_COLOR)
+    if location == (OPEN_LAND_COLOR or ROAD_COLOR or FOOTPATH_COLOR):
         print ("Speed 4")
 
 def getAdj(currentNode, target, terrain_pixel_map):
