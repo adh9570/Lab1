@@ -13,6 +13,8 @@ ROAD_COLOR = (71, 51, 3, 255)
 FOOTPATH_COLOR = (0, 0, 0, 255)
 OOB_COLOR = (205, 0, 101, 255)
 
+ICE_COLOR = (0, 255, 255, 255)  # for winter only
+
 # Speeds in MPH
 OPEN_LAND_SPEED = 4
 ROUGH_MEADOW_SPEED = 1.5
@@ -26,12 +28,32 @@ FOOTPATH_SPEED = 4
 OOB_SPEED = 0
 
 
-def getAdj(currentNode, target):
+def getSpeed(node, terrain_pixel_map):
+    x = node.getX()
+    y = node.getY()
+
+    location = terrain_pixel_map[x, y]
+
+    speed = 0
+
+    if location == (OOB_COLOR or IMPASS_VEG_COLOR or WATER_COLOR):
+        print("Speed zero")
+    if location == ROUGH_MEADOW_COLOR:
+        print("Speed 1.5")
+    if location == WALK_FOREST_COLOR:
+        print("Speed 2.5")
+    if location == (EASY_MOVE_FOREST_COLOR or SLOW_RUN_FOREST_COLOR):
+        print("Speed 3")
+    if location == (OPEN_LAND_COLOR or ROAD_COLOR or FOOTPATH_COLOR)
+        print ("Speed 4")
+
+def getAdj(currentNode, target, terrain_pixel_map):
     x = currentNode.getX()
     y = currentNode.getY()
     nodes = []
     if (x - 1) >= 0:
         node = Node(currentNode.getG() + 1, x - 1, y, target)
+        getSpeed(node, terrain_pixel_map)
         nodes.append(node)
         if (y - 1) >= 0:
             node = Node(currentNode.getG() + 2, x - 1, y - 1, target)
@@ -59,7 +81,7 @@ def getAdj(currentNode, target):
 
 
 
-
+# simple A* search
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
     openList = []
     closedList = []
@@ -83,7 +105,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             continue
 
         # Get adjacent nodes to currentNode
-        nodes = getAdj(currentNode, target)
+        nodes = getAdj(currentNode, target, terrain_pixel_map)
 
         for node in nodes:
             # if node is contained in closedList
@@ -107,14 +129,13 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                     openList.append(node)
 
 
+# Trims the last 5 elements from every line to make each line 395 long
 def trimElev(elevation_map_name):
     with open(elevation_file_name, 'r+') as elevation_file:
         lines = elevation_file.readlines()
         for line in lines:
             words = line.split()
             elevation_file.writelines(words[0:-5])
-
-    print(elevation_file)
 
 
 # return location at top of path file, removes top line
