@@ -117,7 +117,7 @@ def drawPath(path, terrain_image, output_image_filename):
         out_pixel_map[x, y] = PATH_COLOR
     
 
-    Image.show()
+    out_image.show()
 
 
 
