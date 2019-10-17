@@ -119,10 +119,13 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         currentNode = openList[0]
         print("Current node ", currentNode.getX(), currentNode.getY())
         # determine node in open list with lowest f
-        for node in openList:
+        oIndex = 0
+        for oIndex, node in openList:
             if node.getF() < currentNode.getF():
                 currentNode = node
-        openList.remove(currentNode)
+                currentIndex = oIndex
+        # openList.remove(currentNode)
+        openList.pop(currentIndex)
         closedList.append(currentNode)
 
         # Base case
