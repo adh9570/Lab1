@@ -27,6 +27,9 @@ class Node:
     def getSpeed(self):
         return self.speed
 
+    def setSpeed(self, speed):
+        self.speed = speed
+
     def calculateH(self, target):
         x = abs(self.x - target[0])
         y = abs(self.y - target[1])

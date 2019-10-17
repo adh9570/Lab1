@@ -17,7 +17,7 @@ ICE_COLOR = (0, 255, 255, 255)  # for winter only
 PATH_COLOR = (255, 0, 0, 255)   # path will be red
 
 # Speed represented as % of potential speed (100 being fastest, 0 being impossible to traverse)
-def getSpeed(node, terrain_pixel_map, elevation_file_name):
+def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     x = node.getX()
     y = node.getY()
 
@@ -112,7 +112,9 @@ def drawPath(path, terrain_image, output_image_filename):
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
     openList = []
     closedList = []
-    start = Node(0, location[0], location[1], target, None)   # g, x, y, target, parent
+    start = Node(0, location[0], location[1], target, None, 0)   # g, x, y, target, parent, speed
+    speed = calcSpeed(start, terrain_pixel_map, elevation_file_name)
+    start.setSpeed(speed)
     start.setF(0)
     openList.append(start)
     while openList != []:
