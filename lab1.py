@@ -16,7 +16,7 @@ OOB_COLOR = (205, 0, 101, 255)
 ICE_COLOR = (0, 255, 255, 255)  # for winter only
 PATH_COLOR = (255, 0, 0, 255)   # path will be red
 
-# Speed in miles per hour
+# Speed represented as % of potential speed (100 being fastest, 0 being impossible to traverse)
 def getSpeed(node, terrain_pixel_map, elevation_file_name):
     x = node.getX()
     y = node.getY()
@@ -29,13 +29,13 @@ def getSpeed(node, terrain_pixel_map, elevation_file_name):
     if location == OOB_COLOR or location == IMPASS_VEG_COLOR or location == WATER_COLOR:
         speed = 0
     elif location == ROUGH_MEADOW_COLOR:
-        speed = 1.5
+        speed = 30
     elif location == WALK_FOREST_COLOR:
-        speed = 2.5
+        speed = 60
     elif location == EASY_MOVE_FOREST_COLOR or location == SLOW_RUN_FOREST_COLOR:
-        speed = 3
+        speed = 75
     elif location == OPEN_LAND_COLOR or location == ROAD_COLOR or location == FOOTPATH_COLOR:
-        speed = 4
+        speed = 100
     else:
         print("Terrain not recognized.")
         print(location)
@@ -53,43 +53,43 @@ def getAdj(currentNode, target, terrain_pixel_map):
     y = currentNode.getY()
     nodes = []
     if (x - 1) >= 0:
-        node = Node(currentNode.getG() + 1, x - 1, y, target, currentNode)
         speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        node = Node(currentNode.getG() + 1, x - 1, y, target, currentNode, speed)
         if speed != 0:      # we avoid any impassable terrain with this if
             nodes.append(node)
         if (y - 1) >= 0:
-            node = Node(currentNode.getG() + 1, x - 1, y - 1, target, currentNode)
             speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            node = Node(currentNode.getG() + 1, x - 1, y - 1, target, currentNode, speed)
             if speed != 0:
                 nodes.append(node)
         if (y + 1) < 500:   # 500 is max height of map
-            node = Node(currentNode.getG() + 1, x - 1, y + 1, target, currentNode)
             speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            node = Node(currentNode.getG() + 1, x - 1, y + 1, target, currentNode, speed)
             if speed != 0:
                 nodes.append(node)
     if (x + 1) < 395:       # 395 is max width of map
-        node = Node(currentNode.getG() + 1, x + 1, y, target, currentNode)
         speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        node = Node(currentNode.getG() + 1, x + 1, y, target, currentNode, speed)
         if speed != 0:
             nodes.append(node)
         if (y - 1) >= 0:
-            node = Node(currentNode.getG() + 1, x + 1, y - 1, target, currentNode)
             speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            node = Node(currentNode.getG() + 1, x + 1, y - 1, target, currentNode, speed)
             if speed != 0:
                 nodes.append(node)
         if (y + 1) < 500:   # 500 is max height of map
-            node = Node(currentNode.getG() + 1, x + 1, y + 1, target, currentNode)
             speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            node = Node(currentNode.getG() + 1, x + 1, y + 1, target, currentNode, speed)
             if speed != 0:
                 nodes.append(node)
     if (y - 1) >= 0:
-        node = Node(currentNode.getG() + 1, x, y - 1, target, currentNode)
         speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        node = Node(currentNode.getG() + 1, x, y - 1, target, currentNode, speed)
         if speed != 0:
             nodes.append(node)
     if (y + 1) < 500:
-        node = Node(currentNode.getG() + 1, x, y + 1, target, currentNode)
         speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+        node = Node(currentNode.getG() + 1, x, y + 1, target, currentNode, speed)
         if speed != 0:
             nodes.append(node)
 
@@ -153,9 +153,10 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if element == node:
                     continue
             
-            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
-            # node.setH(distance from node to target)
-            # node.setF(node.getG() + node.getH())
+            speed = node.getSpeed()
+            pythag = node.getX()**2 + node.getY()**2
+            node.setH(speed + pythag)
+            node.setF(node.getG() + node.getH())
 
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():

@@ -1,11 +1,12 @@
 class Node:
-    def __init__(self, g, x, y, target, parent):
+    def __init__(self, g, x, y, target, parent, speed):
         self.x = x
         self.y = y
         self.g = g
         self.h = self.calculateH(target)
         self.f = g + self.h
         self.parent = parent
+        self.speed = speed
     
     def getF(self):
         return self.f
@@ -22,6 +23,9 @@ class Node:
 
     def getG(self):
         return self.g
+
+    def getSpeed(self):
+        return self.speed
 
     def calculateH(self, target):
         x = abs(self.x - target[0])
