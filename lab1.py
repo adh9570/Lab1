@@ -237,6 +237,10 @@ if __name__ == "__main__":
 
     location = getLoc(path_file_name)   # starting location, first location in path file
     target = getLoc(path_file_name)
+
+    if location == [] or target == []:
+        print("The path only has one node.")
+        sys.exit()
     
     path = search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
     drawPath(path, terrain_image, output_image_filename)
