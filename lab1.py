@@ -129,7 +129,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             print("LOCAL TARGET FOUND", currentNode.getX(), currentNode.getY())
             target = getLoc(path_file_name)
             if target == []:    # if target = [], we're at the end of the search
-                print("FINAL TARGET FOUND", target[0], target[1])
+                print("FINAL TARGET FOUND", currentNode.getX(), currentNode.getY())
                 path = []
                 current = currentNode
                 while current is not None:
