@@ -117,6 +117,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     openList.append(start)
     while openList != []:
         currentNode = openList[0]
+        print("F is ", currentNode.getF())
         # print("Current node ", currentNode.getX(), currentNode.getY())
         # determine node in open list with lowest f
         oIndex = -1
@@ -148,12 +149,11 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         nodes = getAdj(currentNode, target, terrain_pixel_map)
 
         for node in nodes:
-            # if node is contained in closedList
             for element in closedList:
                 if element == node:
                     continue
             
-            # speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
             # node.setH(distance from node to target)
             # node.setF(node.getG() + node.getH())
 
@@ -161,7 +161,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
                     continue
                         
-                # else:
             openList.append(node)
             
 
