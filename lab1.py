@@ -133,6 +133,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 path = []
                 current = currentNode
                 while current is not None:
+                    print("Current node ", current)
                     path.append(current)
                     current = current.parent
                 return path[::-1]
@@ -142,7 +143,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
         for node in nodes:
             # if node is contained in closedList
-            contained = False
             for element in closedList:
                 if element == node:
                     continue
