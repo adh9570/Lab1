@@ -120,6 +120,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         print("Current node ", currentNode.getX(), currentNode.getY())
         # determine node in open list with lowest f
         oIndex = -1
+        currentNode = 0
         for node in openList:
             oIndex += 1
             if node.getF() < currentNode.getF():
