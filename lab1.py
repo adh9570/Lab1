@@ -160,6 +160,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 print("node's f is smaller than current's f")
                 currentNode = node
                 currentIndex = index
+                print("INDEX " + index)
             # oIndex += 1
         # openList.remove(currentNode)
         openList.pop(currentIndex)
