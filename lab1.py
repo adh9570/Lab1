@@ -155,17 +155,18 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         # determine node in open list with lowest f
         # oIndex = 0
         # index = 0
-        # currentIndex = 0
-        for node in openList:
+        currentIndex = 0
+        for index, node in enumerate(openList):
             # print("Node in open list", node.getX(), node.getY())
             if node.getF() < currentNode.getF():
                 # print("node's f is smaller than current's f")
                 currentNode = node
+                currentIndex = index
                 # currentIndex = oIndex
                 # print("INDEX ", oIndex)
             # oIndex += 1
-        openList.remove(currentNode)
-        # openList.pop(currentIndex)
+        # openList.remove(currentNode)
+        openList.pop(currentIndex)
         # print(openList)
         closedList.append(currentNode)
 
