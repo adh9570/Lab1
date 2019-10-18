@@ -115,6 +115,8 @@ def getAdj(currentNode, target, terrain_pixel_map):
         node = Node(currentNode.getG() + 1, x, y + 1, currentNode, speed)
         if speed != 0:
             nodes.append(node)
+    print("N node.parent", node.parent)
+    print("N node.getparent", node.getParent())
 
     return nodes
 
