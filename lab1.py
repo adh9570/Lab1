@@ -195,12 +195,14 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             node.setH(speed + pythag)
             node.setF(node.getG() + node.getH())
 
+            cont = True
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
                     print("continuing", count)
-                    continue
-            print("not continued", count)
-            openList.append(node)
+                    cont = False
+            if cont:
+                print("not continued", count)
+                openList.append(node)
             count+=1
             
 
