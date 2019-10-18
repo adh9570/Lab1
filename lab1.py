@@ -154,6 +154,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         
         # determine node in open list with lowest f
         # oIndex = 0
+        index = 0
         currentIndex = 0
         for index, node in enumerate(openList):
             # print("Node in open list", node.getX(), node.getY())
