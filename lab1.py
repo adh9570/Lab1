@@ -160,8 +160,10 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             oIndex += 1
             # print("Node in open list", node.getX(), node.getY())
             if node.getF() < currentNode.getF():
-                # print("node's f is smaller than current's f")
+                print("node's f is smaller than current's f")
+                print("old node", currentNode.getX(), currentNode.getY())
                 currentNode = node
+                print("new node", currentNode.getX(), currentNode.getY())
                 currentIndex = oIndex
                 # currentIndex = oIndex
                 # print("INDEX ", oIndex)
