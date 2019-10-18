@@ -6,6 +6,9 @@ class Node:
         self.parent = parent
         self.speed = speed
     
+    def getH(self):
+        return self.h
+
     def setH(self, h):
         self.h = h
     
