@@ -196,8 +196,9 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
+                    print("continuing")
                     continue
-                        
+            print("not continued")
             openList.append(node)
             
 
