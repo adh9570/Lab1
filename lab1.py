@@ -16,6 +16,8 @@ OOB_COLOR = (205, 0, 101, 255)
 ICE_COLOR = (0, 255, 255, 255)  # for winter only
 PATH_COLOR = (255, 0, 0, 255)   # path will be red
 
+EASY_MOVE_FOREST_SPEED = 75
+
 # Speed represented as % of potential speed (100 being fastest, 0 being impossible to traverse)
 def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     x = node.getX()
@@ -32,7 +34,9 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
         speed = 30
     elif location == WALK_FOREST_COLOR:
         speed = 60
-    elif location == EASY_MOVE_FOREST_COLOR or location == SLOW_RUN_FOREST_COLOR:
+    elif location == EASY_MOVE_FOREST_COLOR:
+        speed = EASY_MOVE_FOREST_SPEED
+    elif location == SLOW_RUN_FOREST_COLOR:
         speed = 75
     elif location == OPEN_LAND_COLOR or location == ROAD_COLOR or location == FOOTPATH_COLOR:
         speed = 100
@@ -40,9 +44,16 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
         print("Terrain not recognized.")
         print(location)
 
+    elevations = []
+
     # Edit speed based on elevation change
     with open(elevation_file_name) as elevation_file:
-        pass
+        lines = elevation_file.readlines()
+        for line in lines:
+            words = line.split()
+            elevations.append(words)
+
+    print(elevations)
 
     # print("end speed gotten")
     return speed
@@ -53,13 +64,15 @@ def getAdj(currentNode, target, terrain_pixel_map):
     y = currentNode.getY()
     nodes = []
     if (x - 1) >= 0:
+        node = Node(currentNode.getG() + 1, x - 1, y, target, currentNode, 0)
         speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-        node = Node(currentNode.getG() + 1, x - 1, y, target, currentNode, speed)
-        if speed != 0:      # we avoid any impassable terrain with this if
+        node.setSpeed(speed)
+        if speed != 0:      # avoid any impassable 
             nodes.append(node)
         if (y - 1) >= 0:
+            node = Node(currentNode.getG() + 1, x - 1, y - 1, target, currentNode, 0)
             speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-            node = Node(currentNode.getG() + 1, x - 1, y - 1, target, currentNode, speed)
+            node.setSpeed(speed)
             if speed != 0:
                 nodes.append(node)
         if (y + 1) < 500:   # 500 is max height of map
@@ -194,6 +207,8 @@ def getLoc(path_file_name):
 
 def fall():
     print("FALL")
+    global EASY_MOVE_FOREST_SPEED
+    EASY_MOVE_FOREST_SPEED = 60
 
 
 def winter():
