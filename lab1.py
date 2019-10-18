@@ -54,7 +54,7 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
             elevations.append(words)
 
     parent = node
-    parent = node.getParent()
+    parent = parent.getParent()
 
     elevChange = elevations[node.getX()][node.getY()] # - elevations[parent.getX()][parent.getY()]
 
