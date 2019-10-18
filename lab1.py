@@ -158,7 +158,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             if node.getF() < currentNode.getF():
                 currentNode = node
                 currentIndex = oIndex
-        openList.pop(currentIndex)
+        openList.remove(currentNode)
         print(openList)
         closedList.append(currentNode)
 
