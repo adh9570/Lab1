@@ -11,6 +11,7 @@ class Node:
 
     def setH(self, h):
         self.h = h
+        self.updateF()
     
     def getF(self):
         return self.f
@@ -39,3 +40,6 @@ class Node:
 
     def setSpeed(self, speed):
         self.speed = speed
+
+    def updateF(self):
+        self.f = self.g + self.h

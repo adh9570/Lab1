@@ -114,7 +114,7 @@ def getAdj(currentNode, target, terrain_pixel_map):
         node = Node(currentNode.getG() + 1, x, y + 1, currentNode, speed)
         if speed != 0:
             nodes.append(node)
-            
+
     return nodes
 
 
@@ -143,6 +143,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         currentNode = openList[0]
         print("F is ", currentNode.getF())
         # print("Current node ", currentNode.getX(), currentNode.getY())
+        
         # determine node in open list with lowest f
         oIndex = -1
         currentIndex = 0
