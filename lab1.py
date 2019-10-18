@@ -56,7 +56,7 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     print("nomde.parent ", node.parent)
     print("node get parent ", node.getParent())
     
-    elevChange = elevations[node.getX()][node.getY()] - elevations[node.getParentX()][node.getParentY()]
+    # elevChange = elevations[node.getX()][node.getY()] - elevations[node.getParentX()][node.getParentY()]
 
     # downhill
     if elevChange < 0:
