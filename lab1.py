@@ -53,7 +53,13 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
             words = line.split()
             elevations.append(words)
 
-    print(elevations)
+    parent = node.parent
+
+    elevChange = elevations[node.getX()][node.getY()] - elevations[parent.getX()][parent.getY()]
+
+    # downhill
+    if elevChange < 0:
+        speed += 3
 
     # print("end speed gotten")
     return speed
