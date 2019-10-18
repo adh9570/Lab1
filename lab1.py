@@ -146,6 +146,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     start.setSpeed(speed)
     start.setF(0)
     openList.append(start)
+    count = 0
     while openList != []:
         currentNode = openList[0]
         # print("F is ", currentNode.getF())
@@ -196,10 +197,11 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
-                    print("continuing")
+                    print("continuing", count)
                     continue
-            print("not continued")
+            print("not continued", count)
             openList.append(node)
+            count+=1
             
 
 
