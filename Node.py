@@ -1,10 +1,9 @@
 class Node:
-    def __init__(self, g, x, y, parent, speed):
+    def __init__(self, g, x, y, parent):
         self.x = x
         self.y = y
         self.g = g
         self.parent = parent
-        self.speed = speed
     
     def getH(self):
         return self.h
