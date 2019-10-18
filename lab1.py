@@ -59,11 +59,11 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     # elevChange = elevations[node.getX()][node.getY()] - elevations[node.getParentX()][node.getParentY()]
 
     # downhill
-    if elevChange < 0:
-        speed += 30
-    # uphill
-    elif elevChange > 0:
-        speed -= 30
+    # if elevChange < 0:
+    #     speed += 30
+    # # uphill
+    # elif elevChange > 0:
+    #     speed -= 30
 
     # print("end speed gotten")
     return speed
