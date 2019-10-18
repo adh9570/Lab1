@@ -1,6 +1,7 @@
 import sys
 from PIL import Image
 from Node import Node
+import time
 
 OPEN_LAND_COLOR = (248, 148, 18, 255)
 ROUGH_MEADOW_COLOR = (255, 192, 0, 255)
@@ -148,7 +149,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     while openList != []:
         currentNode = openList[0]
         # print("F is ", currentNode.getF())
-        # print("Current node ", currentNode.getX(), currentNode.getY())
+        print("Current node ", currentNode.getX(), currentNode.getY())
         
         # determine node in open list with lowest f
         oIndex = 0
@@ -239,6 +240,9 @@ def spring():
 
 
 if __name__ == "__main__":
+
+    start = time.time()
+
     # Read in arguments
     terrain_image_name = ''
     elevation_file_name = ''
@@ -286,3 +290,7 @@ if __name__ == "__main__":
     
     path = search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
     drawPath(path, terrain_image, output_image_filename)
+
+    end = time.time()
+
+    print("Time elapsed " + (end - start))
