@@ -1,9 +1,8 @@
 class Node:
-    def __init__(self, g, x, y, target, parent, speed):
+    def __init__(self, g, x, y, parent, speed):
         self.x = x
         self.y = y
         self.g = g
-        self.h = self.calculateH(target)
         self.f = g + self.h
         self.parent = parent
         self.speed = speed
@@ -30,11 +29,8 @@ class Node:
     def getSpeed(self):
         return self.speed
 
+    def getParent(self):
+        return self.parent
+
     def setSpeed(self, speed):
         self.speed = speed
-
-    def calculateH(self, target):
-        x = abs(self.x - target[0])
-        y = abs(self.y - target[1])
-        self.h = (x**2 + y**2)    # pythag theorem # TODO make not pythag
-        return self.h
