@@ -34,5 +34,8 @@ class Node:
     def getParent(self):
         return self.parent
 
+    def getParentX(self):
+        return self.parent.getX()
+
     def setSpeed(self, speed):
         self.speed = speed
