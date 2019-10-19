@@ -29,6 +29,7 @@ class Node:
 
     def setH(self, h):
         self.h = h
+        self.updateF()
 
     def getSpeed(self):
         return self.speed
@@ -41,3 +42,6 @@ class Node:
         y = abs(self.y - target[1])
         self.h = (x**2 + y**2)    # pythag theorem # TODO make not pythag
         return self.h
+
+    def updateF(self):
+        self.f = self.g + self.h
