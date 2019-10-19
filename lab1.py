@@ -2,6 +2,7 @@ import sys
 from PIL import Image
 from Node import Node
 import time
+import math
 
 OPEN_LAND_COLOR = (248, 148, 18, 255)
 ROUGH_MEADOW_COLOR = (255, 192, 0, 255)
@@ -195,10 +196,10 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if element == node:
                     continue
             
-            # speed = node.getSpeed()
-            # pythag = node.getX()**2 + node.getY()**2    # pythagorean theorem used as additional heuristic
-            # node.setH(speed + pythag)
-            # node.setF(node.g + node.getH())
+            speed = node.getSpeed()
+            pythag = math.sqrt((node.getX() - target[0])**2 + (node.getY() - target[1])**2 )   # pythagorean theorem used as additional heuristic
+            node.setH(speed + pythag)
+            node.setF(node.g + node.getH())
 
             cont = True
             for element in openList:
