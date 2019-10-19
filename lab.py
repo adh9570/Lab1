@@ -114,6 +114,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     openList = []
     closedList = []
     start = Node(0, location[0], location[1], target, None)   # g, x, y, target, parent
+    startSpeed = getSpeed(start, terrain_pixel_map, elevation_file_name)
+    start.setSpeed(startSpeed)
     start.setF(0)
     openList.append(start)
     while openList != []:
@@ -155,7 +157,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                     continue
             
             # speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
-            speed = node.getSpeed()
+            speed = node.grabSpeed()
             pythag = math.sqrt(abs((node.getX() - target[0])**2 + (node.getY() - target[1])**2 ))   # pythagorean theorem used as additional heuristic
             node.setH(speed + pythag)
             node.setF(node.getG() + node.getH())

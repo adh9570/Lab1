@@ -31,7 +31,7 @@ class Node:
     def getG(self):
         return self.g
 
-    def getSpeed(self):
+    def grabSpeed(self):
         return self.speed
 
     def setSpeed(self, speed):
