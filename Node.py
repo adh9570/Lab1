@@ -12,12 +12,13 @@ class Node:
         self.h = h
         self.updateF()
     
-    def getF(self):
-        return self.f
-
     # for start node
     def setF(self, f):
         self.f = f
+
+    def getF(self):
+        return self.f
+
 
     def getX(self):
         return self.x
