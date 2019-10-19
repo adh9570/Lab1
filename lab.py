@@ -2,6 +2,7 @@ import sys
 from PIL import Image
 from Node2 import Node
 import math
+from heapq import *
 
 OPEN_LAND_COLOR = (248, 148, 18, 255)
 ROUGH_MEADOW_COLOR = (255, 192, 0, 255)
@@ -111,28 +112,47 @@ def drawPath(path, terrain_image, output_image_filename):
 
 # simple A* search
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
-    openList = []
-    closedList = []
+    # openList = []
+    # closedList = []
+    close_set = set()
+    came_from = {}
     start = Node(0, location[0], location[1], target, None)   # g, x, y, target, parent
     startSpeed = getSpeed(start, terrain_pixel_map, elevation_file_name)
     start.setSpeed(startSpeed)
     start.setF(0)
-    openList.append(start)
-    while openList != []:
-        currentNode = openList[0]
+    gscore = {start:0}
+    fscore = {start:start.getH() + startSpeed}
+    oheap = []
+
+    heappush(oheap, (fscore[start], start))
+    # openList.append(start)
+    # while openList != []:
+    while oheap:
+        # currentNode = openList[0]
+        currentNode = heappop(oheap)[1]
         # print("Current node ", currentNode.getX(), currentNode.getY())
         # determine node in open list with lowest f
-        oIndex = -1
-        currentIndex = 0
-        for node in openList:
-            oIndex += 1
-            if node.getF() < currentNode.getF():
-                currentNode = node
-                currentIndex = oIndex
-        # openList.remove(currentNode)
-        openList.pop(currentIndex)
-        print(openList)
-        closedList.append(currentNode)
+        # oIndex = -1
+        # currentIndex = 0
+        # for node in openList:
+        #     oIndex += 1
+        #     if node.getF() < currentNode.getF():
+        #         currentNode = node
+        #         currentIndex = oIndex
+        # # openList.remove(currentNode)
+        # openList.pop(currentIndex)
+        # print(open)
+        # closedList.append(currentNode)
+
+
+        if currentNode.x == target[0] and currentNode.y == target[1]:
+            data = []
+            while currentNode in came_from:
+                data.append(currentNode)
+                currentNode = came_from[currentNode]
+            return data
+
+        close_set.add(currentNode)
 
         # Base case
         if currentNode.getX() == target[0] and currentNode.getY() == target[1]:
@@ -148,8 +168,14 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                     current = current.parent
                 return path[::-1]
 
+
         # Get adjacent nodes to currentNode
         nodes = getAdj(currentNode, target, terrain_pixel_map)
+        
+        close_set.add(currentNode)
+        for i, j in nodes:
+            node = currentNode[0] + i, current[1] + j
+            tent_g = gscore[current] + node.getH()
 
         for node in nodes:
             # if node is contained in closedList
