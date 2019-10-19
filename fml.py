@@ -160,7 +160,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 heapq.heappush(openList, next)
                 came_from[next] = currentNode
 
-            print(openList)
+            # print(openList)
 
 
         # currentNode = openList[0]
