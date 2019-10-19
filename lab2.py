@@ -130,6 +130,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 currentIndex = oIndex
         # openList.remove(currentNode)
         openList.pop(currentIndex)
+        print(openList)
         closedList.append(currentNode)
 
         # Base case
@@ -157,9 +158,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             
             speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
             node.setSpeed(speed)
-            node.setH(node.getH() + speed)
-            # node.setH(distance from node to target)
-            # node.setF(node.getG() + node.getH())
+            node.setH(node.getH() + speed)  # H is originally set to pythag theorem
 
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
