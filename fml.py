@@ -111,20 +111,20 @@ def drawPath(path, terrain_image, output_image_filename):
 
 # simple A* search
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
-    openList = []
     closedList = []
     start = Node(0, location[0], location[1], target, None)   # g, x, y, target, parent
     startSpeed = calcSpeed(start, terrain_pixel_map, elevation_file_name)
     start.setSpeed(startSpeed)
     start.setF(0)
-    openList.append(start)
-    frontier = heapq.heapify(openList)
+    openList = [start]
+    heapq.heapify(openList)
     came_from = {}
     cost_so_far = {}
     came_from[start] = None
     cost_so_far[start] = 0
-    while not frontier.empty():
-        currentNode = frontier.get()
+    while len(openList) != 0:
+        currentNode = heapq.heappop(openList)
+        print("current node", currentNode)
 
         # Base case
         if currentNode.getX() == target[0] and currentNode.getY() == target[1]:
@@ -144,15 +144,23 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         nodes = getAdj(currentNode, target, terrain_pixel_map)
 
         for next in nodes:
+            print("going through the nodes")
             speed = calcSpeed(next, terrain_pixel_map, elevation_file_name)
+            print("speed", speed)
             next.setSpeed(speed)
             next.setH(next.getH() + speed)  # H is originally set to pythag theorem
+            print("next h", next.getH())
             new_cost = cost_so_far[currentNode] + 1
+            print("new cost", new_cost)
             if next not in cost_so_far or new_cost < cost_so_far[next]:
+                print('in if')
                 cost_so_far[next] = new_cost
                 priority = new_cost + next.getH()
-                frontier.put(next, priority)
+                next.setF(priority)
+                heapq.heappush(openList, next)
                 came_from[next] = current
+
+            print(openList)
 
 
         # currentNode = openList[0]
