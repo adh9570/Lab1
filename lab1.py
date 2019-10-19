@@ -45,26 +45,26 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
         print("Terrain not recognized.")
         print(location)
 
-    elevations = []
+    # elevations = []
 
-    # Edit speed based on elevation change
-    with open(elevation_file_name) as elevation_file:
-        lines = elevation_file.readlines()
-        for line in lines:
-            words = line.split()
-            elevations.append(words)
+    # # Edit speed based on elevation change
+    # with open(elevation_file_name) as elevation_file:
+    #     lines = elevation_file.readlines()
+    #     for line in lines:
+    #         words = line.split()
+    #         elevations.append(words)
     
-    if node.parent == None:
-        elevChange = 0
-    else:
-        elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
+    # if node.parent == None:
+    #     elevChange = 0
+    # else:
+    #     elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
 
-    # downhill
-    if elevChange < 0:
-        speed += 30
-    # uphill
-    elif elevChange > 0:
-        speed -= 30
+    # # downhill
+    # if elevChange < 0:
+    #     speed += 30
+    # # uphill
+    # elif elevChange > 0:
+    #     speed -= 30
 
     print("speed", speed)
     return speed
@@ -147,7 +147,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     start.setSpeed(speed)
     start.setF(0)
     openList.append(start)
-    count = 0
+    # count = 0
     while openList != []:
         currentNode = openList[0]
         # print("F is ", currentNode.getF())
@@ -195,20 +195,22 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if element == node:
                     continue
             
-            speed = node.getSpeed()
-            pythag = node.getX()**2 + node.getY()**2    # pythagorean theorem used as additional heuristic
-            node.setH(speed + pythag)
-            node.setF(node.g + node.getH())
+            # speed = node.getSpeed()
+            # pythag = node.getX()**2 + node.getY()**2    # pythagorean theorem used as additional heuristic
+            # node.setH(speed + pythag)
+            # node.setF(node.g + node.getH())
 
-            cont = True
+            # cont = True
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.g > element.g:
-                    print("continuing", count)
-                    cont = False
-            if cont:
-                print("not continued", count)
-                openList.append(node)
-            count+=1
+                    continue
+                    # print("continuing", count)
+                    # cont = False
+            # if cont:
+                # print("not continued", count)
+                # openList.append(node)
+            # count+=1
+            openList.append(node)
             
 
 
@@ -296,7 +298,7 @@ if __name__ == "__main__":
     target = getLoc(path_file_name)
 
     if location == [] or target == []:
-        print("The path only has one node.")
+        print("The path has too few nodes.")
         sys.exit()
     
     path = search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target)
