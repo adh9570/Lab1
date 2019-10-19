@@ -2,6 +2,7 @@ import sys
 from PIL import Image
 from Node2 import Node
 import math
+from queue import PriorityQueue
 
 OPEN_LAND_COLOR = (248, 148, 18, 255)
 ROUGH_MEADOW_COLOR = (255, 192, 0, 255)
@@ -111,27 +112,36 @@ def drawPath(path, terrain_image, output_image_filename):
 
 # simple A* search
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
-    openList = []
-    closedList = []
+    # openList = []
+    frontier = PriorityQueue()
+    # closedList = []
+    came_from = {} # parents
+    cost_so_far = {}
+
     start = Node(0, location[0], location[1], target, None)   # g, x, y, target, parent
     startSpeed = getSpeed(start, terrain_pixel_map, elevation_file_name)
     start.setSpeed(startSpeed)
     start.setF(0)
-    openList.append(start)
-    while openList != []:
-        currentNode = openList[0]
+    # openList.append(start)
+    frontier.put(start, 0)
+    came_from[start] = None
+    cost_so_far[start] = 0
+    # while openList != []:
+    while not frontier.empty():
+        # currentNode = openList[0]
+        currentNode = frontier.get()
         # print("Current node ", currentNode.getX(), currentNode.getY())
         # determine node in open list with lowest f
-        oIndex = -1
-        currentIndex = 0
-        for node in openList:
-            oIndex += 1
-            if node.getF() < currentNode.getF():
-                currentNode = node
-                currentIndex = oIndex
-        # openList.remove(currentNode)
-        openList.pop(currentIndex)
-        closedList.append(currentNode)
+        # oIndex = -1
+        # currentIndex = 0
+        # for node in openList:
+        #     oIndex += 1
+        #     if node.getF() < currentNode.getF():
+        #         currentNode = node
+        #         currentIndex = oIndex
+        # # openList.remove(currentNode)
+        # openList.pop(currentIndex)
+        # closedList.append(currentNode)
 
         # Base case
         if currentNode.getX() == target[0] and currentNode.getY() == target[1]:
@@ -152,22 +162,31 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
 
         for node in nodes:
             # if node is contained in closedList
-            for element in closedList:
-                if element == node:
-                    continue
+            # for element in closedList:
+            #     if element == node:
+            #         continue
+
+            new_cost = cost_so_far[currentNode] + 1
+            if node not in cost_so_far or new_cost < cost_so_far[node]:
+                cost_so_far[node] = new_cost
+                f = new_cost + node.getH()
+                frontier.put(node, f)
+                came_from[node] = currentNode
             
             # speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
-            speed = node.grabSpeed()
-            pythag = math.sqrt(abs((node.getX() - target[0])**2 + (node.getY() - target[1])**2 ))   # pythagorean theorem used as additional heuristic
-            node.setH(speed + pythag)
-            node.setF(node.getG() + node.getH())
+            # speed = node.grabSpeed()
+            # pythag = math.sqrt(abs((node.getX() - target[0])**2 + (node.getY() - target[1])**2 ))   # pythagorean theorem used as additional heuristic
+            # node.setH(speed + pythag)
+            # node.setF(node.getG() + node.getH())
 
-            for element in openList:
-                if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
-                    continue
+            # for element in openList:
+            #     if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
+            #         continue
                         
-                # else:
-            openList.append(node)
+            #     # else:
+            # openList.append(node)
+
+        # return came_from, cost_so_far
             
 
 
