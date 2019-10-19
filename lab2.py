@@ -130,7 +130,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 currentIndex = oIndex
         # openList.remove(currentNode)
         openList.pop(currentIndex)
-        print(openList)
         closedList.append(currentNode)
 
         # Base case
