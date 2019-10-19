@@ -66,6 +66,7 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     elif elevChange > 0:
         speed -= 30
 
+    print("speed", speed)
     return speed
 
 
@@ -150,7 +151,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     while openList != []:
         currentNode = openList[0]
         # print("F is ", currentNode.getF())
-        print("Current node ", currentNode.getX(), currentNode.getY())
+        # print("Current node ", currentNode.getX(), currentNode.getY())
         
         # determine node in open list with lowest f
         oIndex = -1
@@ -160,7 +161,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             oIndex += 1
             # print("Node in open list", node.getX(), node.getY())
             if node.getF() < currentNode.getF():
-                print("node's f is smaller than current's f")
+                # print("node's f is smaller than current's f")
                 print("old node", currentNode.getX(), currentNode.getY())
                 currentNode = node
                 print("new node", currentNode.getX(), currentNode.getY())

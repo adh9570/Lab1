@@ -42,6 +42,3 @@ class Node:
 
     def updateF(self):
         self.f = self.g + self.h
-
-    def calcH(self):
-        self.h = self.speed
