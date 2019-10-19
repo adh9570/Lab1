@@ -158,7 +158,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 priority = new_cost + next.getH()
                 next.setF(priority)
                 heapq.heappush(openList, next)
-                came_from[next] = current
+                came_from[next] = currentNode
 
             print(openList)
 
