@@ -1,6 +1,7 @@
 import sys
 from PIL import Image
 from Node2 import Node
+import math
 
 OPEN_LAND_COLOR = (248, 148, 18, 255)
 ROUGH_MEADOW_COLOR = (255, 192, 0, 255)
