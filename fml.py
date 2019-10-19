@@ -127,7 +127,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         closedList[currentNode] = 0
         # for element in openList:
         #     print("NODE", element.getX(), element.getY())
-        print("current node", currentNode.getX(), currentNode.getY())
+        # print("current node", currentNode.getX(), currentNode.getY())
 
         # Base case
         if currentNode.getX() == target[0] and currentNode.getY() == target[1]:
