@@ -1,9 +1,11 @@
+import math
+
 class Node:
     def __init__(self, g, x, y, target, parent):
         self.x = x
         self.y = y
         self.g = g
-        self.h = 0
+        self.h = self.calculateH(target)    # initial h value is pythag
         self.f = g + self.h
         self.parent = parent
         self.speed = 0
@@ -36,5 +38,5 @@ class Node:
     def calculateH(self, target):
         x = abs(self.x - target[0])
         y = abs(self.y - target[1])
-        self.h = (x**2 + y**2)    # pythag theorem # TODO make not pythag
+        self.h = math.sqrt(x**2 + y**2)    # pythag theorem 
         return self.h
