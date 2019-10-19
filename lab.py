@@ -154,7 +154,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if element == node:
                     continue
             
-            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            # speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            speed = node.getSpeed()
             pythag = math.sqrt(abs((node.getX() - target[0])**2 + (node.getY() - target[1])**2 ))   # pythagorean theorem used as additional heuristic
             node.setH(speed + pythag)
             node.setF(node.getG() + node.getH())
