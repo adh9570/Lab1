@@ -153,9 +153,10 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if element == node:
                     continue
             
-            # speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
-            # node.setH(distance from node to target)
-            # node.setF(node.getG() + node.getH())
+            speed = getSpeed(node, terrain_pixel_map, elevation_file_name)
+            pythag = math.sqrt(abs((node.getX() - target[0])**2 + (node.getY() - target[1])**2 ))   # pythagorean theorem used as additional heuristic
+            node.setH(speed + pythag)
+            node.setF(node.getG() + node.getH())
 
             for element in openList:
                 if node.getX() == element.getX() and node.getY() == element.getY() and node.getG() > element.getG():
