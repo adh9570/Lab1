@@ -111,7 +111,7 @@ def drawPath(path, terrain_image, output_image_filename):
 
 # simple A* search
 def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_filename, location, target):
-    closedList = []
+    closedList = {}
     start = Node(0, location[0], location[1], target, None)   # g, x, y, target, parent
     startSpeed = calcSpeed(start, terrain_pixel_map, elevation_file_name)
     start.setSpeed(startSpeed)
@@ -124,8 +124,9 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     cost_so_far[start] = 0
     while len(openList) != 0:
         currentNode = heapq.heappop(openList)
-        for element in openList:
-            print("NODE", element.getX(), element.getY())
+        closedList[currentNode] = 0
+        # for element in openList:
+        #     print("NODE", element.getX(), element.getY())
         print("current node", currentNode.getX(), currentNode.getY())
 
         # Base case
@@ -146,6 +147,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         nodes = getAdj(currentNode, target, terrain_pixel_map)
 
         for next in nodes:
+            if next in closedList:
+                continue
             # print("going through the nodes")
             speed = calcSpeed(next, terrain_pixel_map, elevation_file_name)
             # print("speed", speed)
