@@ -155,7 +155,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 if element == node:
                     continue
             
-            # speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
+            speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
+            node.setSpeed(speed)
             # node.setH(distance from node to target)
             # node.setF(node.getG() + node.getH())
 
