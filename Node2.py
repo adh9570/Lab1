@@ -3,11 +3,10 @@ class Node:
         self.x = x
         self.y = y
         self.g = g
-        # self.h = 0
-        # self.f = 0
         self.h = self.calculateH(target)
         self.f = g + self.h
         self.parent = parent
+        self.speed = 0
     
     def getF(self):
         return self.f
