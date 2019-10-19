@@ -1,7 +1,7 @@
 
 import sys
 from PIL import Image
-from Node import Node
+from Node2 import Node
 import math
 
 OPEN_LAND_COLOR = (248, 148, 18, 255)
