@@ -3,6 +3,7 @@ class Node:
         self.x = x
         self.y = y
         self.g = g
+        self.f = 0
         self.parent = parent
     
     def getH(self):
