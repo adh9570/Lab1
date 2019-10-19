@@ -209,7 +209,7 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             if cont:
                 # print("not continued", count)
                 openList.append(node)
-            count+=1
+            # count+=1
             # openList.append(node)
             
 
