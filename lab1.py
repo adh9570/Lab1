@@ -205,14 +205,14 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
             for element in openList:
                 # if node.getX() == element.getX() and node.getY() == element.getY() and node.g > element.g:
                 if node == element and node.g > element.g:
-                    continue
+                    # continue
                     # print("continuing", count)
-                    # cont = False
-            # if cont:
+                    cont = False
+            if cont:
                 # print("not continued", count)
-                # openList.append(node)
+                openList.append(node)
             # count+=1
-            openList.append(node)
+            # openList.append(node)
             
 
 
