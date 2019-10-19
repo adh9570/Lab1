@@ -24,6 +24,12 @@ class Node:
     def getG(self):
         return self.g
 
+    def getH(self):
+        return self.h
+
+    def setH(self, h):
+        self.h = h
+
     def getSpeed(self):
         return self.speed
 
