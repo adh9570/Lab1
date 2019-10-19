@@ -124,6 +124,8 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     cost_so_far[start] = 0
     while len(openList) != 0:
         currentNode = heapq.heappop(openList)
+        for element in openList:
+            print("NODE", element.getX(), element.getY())
         print("current node", currentNode.getX(), currentNode.getY())
 
         # Base case
