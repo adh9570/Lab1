@@ -3,7 +3,7 @@ class Node:
         self.x = x
         self.y = y
         self.g = g
-        self.h = self.calculateH(target)
+        self.h = 0
         self.f = g + self.h
         self.parent = parent
         self.speed = 0
