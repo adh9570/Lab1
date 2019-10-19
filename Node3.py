@@ -6,6 +6,7 @@ class Node:
         self.h = self.calculateH(target)
         self.f = g + self.h
         self.parent = parent
+        self.speed = 0
     
     def getF(self):
         return self.f
@@ -22,6 +23,12 @@ class Node:
 
     def getG(self):
         return self.g
+
+    def getSpeed(self):
+        return self.speed
+
+    def setSpeed(self, speed):
+        self.speed = speed
 
     def calculateH(self, target):
         x = abs(self.x - target[0])
