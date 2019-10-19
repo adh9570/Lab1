@@ -144,16 +144,16 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
         nodes = getAdj(currentNode, target, terrain_pixel_map)
 
         for next in nodes:
-            print("going through the nodes")
+            # print("going through the nodes")
             speed = calcSpeed(next, terrain_pixel_map, elevation_file_name)
-            print("speed", speed)
+            # print("speed", speed)
             next.setSpeed(speed)
             next.setH(next.getH() + speed)  # H is originally set to pythag theorem
-            print("next h", next.getH())
+            # print("next h", next.getH())
             new_cost = cost_so_far[currentNode] + 1
-            print("new cost", new_cost)
+            # print("new cost", new_cost)
             if next not in cost_so_far or new_cost < cost_so_far[next]:
-                print('in if')
+                # print('in if')
                 cost_so_far[next] = new_cost
                 priority = new_cost + next.getH()
                 next.setF(priority)
