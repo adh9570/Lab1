@@ -53,10 +53,10 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
 
     print("we escaped")
     
-    # if node.parent == None:
-    #     elevChange = 0
-    # else:
-    #     elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
+    if node.parent == None:
+        elevChange = 0
+    else:
+        elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
 
     # # downhill
     # if elevChange < 0:
