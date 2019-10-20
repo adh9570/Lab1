@@ -16,6 +16,8 @@ OOB_COLOR = (205, 0, 101, 255)
 ICE_COLOR = (0, 255, 255, 255)  # for winter only
 PATH_COLOR = (255, 0, 0, 255)   # path will be red
 
+EASY_MOVE_FOREST_SPEED = 75
+
 # Speed in miles per hour
 def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     x = node.getX()
