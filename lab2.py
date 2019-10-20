@@ -41,14 +41,14 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
         print(location)
 
 
-    # elevations = []
+    elevations = []
 
-    # # Edit speed based on elevation change
-    # with open(elevation_file_name) as elevation_file:
-    #     lines = elevation_file.readlines()
-    #     for line in lines:
-    #         words = line.split()
-    #         elevations.append(words)
+    # Edit speed based on elevation change
+    with open(elevation_file_name) as elevation_file:
+        lines = elevation_file.readlines()
+        for line in lines:
+            words = line.split()
+            elevations.append(words)
     
     # if node.parent == None:
     #     elevChange = 0
