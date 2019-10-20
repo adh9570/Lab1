@@ -78,42 +78,42 @@ def getAdj(currentNode, target, terrain_pixel_map):
     if (x - 1) >= 0:
         node = Node(currentNode.getG() + 1, x - 1, y, target, currentNode)
         speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-        if speed != 0:      # we avoid any impassable terrain with this if
+        if speed >= 0:      # we avoid any impassable terrain with this if
             nodes.append(node)
         if (y - 1) >= 0:
             node = Node(currentNode.getG() + 1, x - 1, y - 1, target, currentNode)
             speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-            if speed != 0:
+            if speed >= 0:
                 nodes.append(node)
         if (y + 1) < 500:   # 500 is max height of map
             node = Node(currentNode.getG() + 1, x - 1, y + 1, target, currentNode)
             speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-            if speed != 0:
+            if speed >= 0:
                 nodes.append(node)
     if (x + 1) < 395:       # 395 is max width of map
         node = Node(currentNode.getG() + 1, x + 1, y, target, currentNode)
         speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-        if speed != 0:
+        if speed >= 0:
             nodes.append(node)
         if (y - 1) >= 0:
             node = Node(currentNode.getG() + 1, x + 1, y - 1, target, currentNode)
             speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-            if speed != 0:
+            if speed >= 0:
                 nodes.append(node)
         if (y + 1) < 500:   # 500 is max height of map
             node = Node(currentNode.getG() + 1, x + 1, y + 1, target, currentNode)
             speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-            if speed != 0:
+            if speed >= 0:
                 nodes.append(node)
     if (y - 1) >= 0:
         node = Node(currentNode.getG() + 1, x, y - 1, target, currentNode)
         speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-        if speed != 0:
+        if speed >= 0:
             nodes.append(node)
     if (y + 1) < 500:
         node = Node(currentNode.getG() + 1, x, y + 1, target, currentNode)
         speed = calcSpeed(node, terrain_pixel_map, elevation_file_name)
-        if speed != 0:
+        if speed >= 0:
             nodes.append(node)
 
     return nodes
