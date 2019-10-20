@@ -29,13 +29,15 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     if location == OOB_COLOR or location == IMPASS_VEG_COLOR or location == WATER_COLOR:
         speed = 0
     elif location == ROUGH_MEADOW_COLOR:
-        speed = 1.5
+        speed = 30
     elif location == WALK_FOREST_COLOR:
-        speed = 2.5
-    elif location == EASY_MOVE_FOREST_COLOR or location == SLOW_RUN_FOREST_COLOR:
-        speed = 3
+        speed = 60
+    elif location == EASY_MOVE_FOREST_COLOR:
+        speed = EASY_MOVE_FOREST_SPEED
+    elif location == SLOW_RUN_FOREST_COLOR:
+        speed = 75
     elif location == OPEN_LAND_COLOR or location == ROAD_COLOR or location == FOOTPATH_COLOR:
-        speed = 4
+        speed = 100
     else:
         print("Terrain not recognized.")
         print(location)
