@@ -42,32 +42,35 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
         speed = 100
     else:
         print("Terrain not recognized.")
-        print(location)
 
+    '''
+    This next section is how I handled elevation, however it slowed the
+    program dramatically for reasons I was unable to debug. Thus, it is 
+    commented out for efficiency.
+    '''
 
-    # elevations = []
+    elevations = []
 
-    # # Edit speed based on elevation change
-    # with open(elevation_file_name) as elevation_file:
-    #     # pass
-    #     lines = elevation_file.readlines()
-    #     for line in lines:
-    #         words = line.split()
-    #         elevations.append(words)
+    # Edit speed based on elevation change
+    with open(elevation_file_name) as elevation_file:
+        # pass
+        lines = elevation_file.readlines()
+        for line in lines:
+            words = line.split()
+            elevations.append(words)
 
-    # if node.parent == None:
-    #     elevChange = 0
-    # else:
-    #     elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
+    if node.parent == None:
+        elevChange = 0
+    else:
+        elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
 
-    # # downhill
-    # if elevChange < 0:
-    #     speed += 30
-    # # uphill
-    # elif elevChange > 0:
-    #     speed -= 30
+    # downhill
+    if elevChange < 0 and speed > 0:    # because a downhill elevation could change an impassable terrain to have a speed, we check to make sure speed > 0
+        speed += 30
+    # uphill
+    elif elevChange > 0:
+        speed -= 30
 
-    # print("end speed gotten", speed)
     return speed
 
 
@@ -142,7 +145,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
     openList.append(start)
     while openList != []:
         currentNode = openList[0]
-        # print("Current node ", currentNode.getX(), currentNode.getY())
         # determine node in open list with lowest f
         oIndex = -1
         currentIndex = 0
@@ -164,7 +166,6 @@ def search(terrain_pixel_map, elevation_file_name, path_file_name, output_image_
                 path = []
                 current = currentNode
                 while current is not None:
-                    # print("Current node ", current)
                     path.append(current)
                     current = current.parent
                 return path[::-1]
@@ -216,7 +217,8 @@ def getLoc(path_file_name):
 
 
 def fall():
-    print("FALL")
+    global EASY_MOVE_FOREST_SPEED
+    EASY_MOVE_FOREST_SPEED = 60
 
 
 def winter():
@@ -244,12 +246,6 @@ if __name__ == "__main__":
     except:
         print("Error: args should be formatted [terrain-image, elevation-file, path-file, season (summer,fall,winter,or spring), output-image-filename]")
         sys.exit()
-
-    print(terrain_image_name)
-    print(elevation_file_name)
-    print(path_file_name)
-    print(season)
-    print(output_image_filename)
 
     terrain_image = Image.open(terrain_image_name)
     terrain_pixel_map = terrain_image.load()
