@@ -49,27 +49,27 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     commented out for efficiency.
     '''
 
-    elevations = []
+    # elevations = []
 
-    # Edit speed based on elevation change
-    with open(elevation_file_name) as elevation_file:
-        # pass
-        lines = elevation_file.readlines()
-        for line in lines:
-            words = line.split()
-            elevations.append(words)
+    # # Edit speed based on elevation change
+    # with open(elevation_file_name) as elevation_file:
+    #     # pass
+    #     lines = elevation_file.readlines()
+    #     for line in lines:
+    #         words = line.split()
+    #         elevations.append(words)
 
-    if node.parent == None:
-        elevChange = 0
-    else:
-        elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
+    # if node.parent == None:
+    #     elevChange = 0
+    # else:
+    #     elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
 
-    # downhill
-    if elevChange < 0 and speed > 0:    # because a downhill elevation could change an impassable terrain to have a speed, we check to make sure speed > 0
-        speed += 30
-    # uphill
-    elif elevChange > 0:
-        speed -= 30
+    # # downhill
+    # if elevChange < 0 and speed > 0:    # because a downhill elevation could change an impassable terrain to have a speed, we check to make sure speed > 0
+    #     speed += 30
+    # # uphill
+    # elif elevChange > 0:
+    #     speed -= 30
 
     return speed
 
