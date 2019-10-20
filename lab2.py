@@ -67,7 +67,7 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     elif elevChange > 0:
         speed -= 30
 
-    print("end speed gotten", speed)
+    # print("end speed gotten", speed)
     return speed
 
 
