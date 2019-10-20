@@ -40,9 +40,27 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
         print("Terrain not recognized.")
         print(location)
 
+
+    elevations = []
+
     # Edit speed based on elevation change
     with open(elevation_file_name) as elevation_file:
-        pass
+        lines = elevation_file.readlines()
+        for line in lines:
+            words = line.split()
+            elevations.append(words)
+    
+    if node.parent == None:
+        elevChange = 0
+    else:
+        elevChange = float(elevations[node.getX()][node.getY()]) - float(elevations[node.parent.getX()][node.parent.getY()])
+
+    # downhill
+    if elevChange < 0:
+        speed += 30
+    # uphill
+    elif elevChange > 0:
+        speed -= 30
 
     # print("end speed gotten")
     return speed
