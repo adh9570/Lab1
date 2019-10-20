@@ -47,8 +47,8 @@ def calcSpeed(node, terrain_pixel_map, elevation_file_name):
     with open(elevation_file_name) as elevation_file:
         # pass
         lines = elevation_file.readlines()
-        # for line in lines:
-        #     words = line.split()
+        for line in lines:
+            words = line.split()
         #     elevations.append(words)
 
     print("we escaped")
